@@ -14,6 +14,7 @@
                 
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test/resources"/>
                 
         <property name="context-root" value="springapp"/>
                 
