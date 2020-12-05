@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.companyname.springapp.domain.Product;
+import com.companyname.springapp.repository.InMemoryProductDao;
+import com.companyname.springapp.repository.ProductDao;
 
 public class SimpleProductManagerTests {
 
@@ -29,7 +31,6 @@ public class SimpleProductManagerTests {
         productManager = new SimpleProductManager();
         products = new ArrayList<Product>();
         
-        // stub up a list of products
         Product product = new Product();
         product.setDescription("Chair");
         product.setPrice(CHAIR_PRICE);
@@ -40,13 +41,14 @@ public class SimpleProductManagerTests {
         product.setPrice(TABLE_PRICE);
         products.add(product);
         
-        productManager.setProducts(products);
-
+        ProductDao productDao = new InMemoryProductDao(products);
+        productManager.setProductDao(productDao);
     }
 
     @Test
     public void testGetProductsWithNoProducts() {
         productManager = new SimpleProductManager();
+        productManager.setProductDao(new InMemoryProductDao(null));
         assertNull(productManager.getProducts());
     }
 
@@ -68,6 +70,7 @@ public class SimpleProductManagerTests {
     public void testIncreasePriceWithNullListOfProducts() {
         try {
             productManager = new SimpleProductManager();
+            productManager.setProductDao(new InMemoryProductDao(null));
             productManager.increasePrice(POSITIVE_PRICE_INCREASE);
         }
         catch(NullPointerException ex) {
@@ -79,7 +82,7 @@ public class SimpleProductManagerTests {
     public void testIncreasePriceWithEmptyListOfProducts() {
         try {
             productManager = new SimpleProductManager();
-            productManager.setProducts(new ArrayList<Product>());
+            productManager.setProductDao(new InMemoryProductDao(new ArrayList<Product>()));
             productManager.increasePrice(POSITIVE_PRICE_INCREASE);
         }
         catch(Exception ex) {
