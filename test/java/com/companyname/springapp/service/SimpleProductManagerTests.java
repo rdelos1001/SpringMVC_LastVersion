@@ -20,11 +20,11 @@ public class SimpleProductManagerTests {
     
     private static int PRODUCT_COUNT = 2;
     
-    private static Double CHAIR_PRICE = new Double(20.50);
+    private static Double CHAIR_PRICE = 20.50;
     private static String CHAIR_DESCRIPTION = "Chair";
     private static int POSITIVE_PRICE_INCREASE = 10; 
     private static String TABLE_DESCRIPTION = "Table";
-    private static Double TABLE_PRICE = new Double(150.10); 
+    private static Double TABLE_PRICE = 150.10; 
     
     @Before
     public void setUp() throws Exception {
